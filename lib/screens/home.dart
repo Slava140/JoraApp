@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/screens/increment.dart';
+import 'package:test_app/screens/decrement.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.title});
@@ -9,11 +11,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _counter = 0;
+  int _selectedIndex = 0;
+  static const List<Widget> _widgetOptions = <Widget>[
+    IncrementScreen(title: 'Add'),
+    DecrementScreen(title: 'Sub'),
+  ];
 
-  void _incrementCounter() {
+  void _onItemTapped(int index) {
     setState(() {
-      _counter++;
+      _selectedIndex = index;
     });
   }
 
@@ -24,22 +30,14 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.arrow_drop_up_rounded), label: 'Add'),
+          BottomNavigationBarItem(icon: Icon(Icons.arrow_drop_down_rounded), label: 'Sub'),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
   }
