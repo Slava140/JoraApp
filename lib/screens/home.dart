@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test_app/screens/increment.dart';
-import 'package:test_app/screens/decrement.dart';
+import 'package:test_app/screens/projectsList.dart';
+import 'package:test_app/screens/tasksList.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.title});
@@ -12,9 +12,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+
   static const List<Widget> _widgetOptions = <Widget>[
-    IncrementScreen(title: 'Add'),
-    DecrementScreen(title: 'Sub'),
+    ProjectsListScreen(),
+    TasksListScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -27,14 +28,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.onSecondary,
         title: Text(widget.title),
       ),
       body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.arrow_drop_up_rounded), label: 'Add'),
-          BottomNavigationBarItem(icon: Icon(Icons.arrow_drop_down_rounded), label: 'Sub'),
+          BottomNavigationBarItem(icon: Icon(Icons.view_list), label: 'Проекты'),
+          BottomNavigationBarItem(icon: Icon(Icons.task_alt), label: 'Мои задачи'),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
