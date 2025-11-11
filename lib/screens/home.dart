@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test_app/screens/projectsList.dart';
-import 'package:test_app/screens/tasksList.dart';
+import 'package:test_app/screens/projects_list.dart';
+import 'package:test_app/screens/tasks_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.title});
